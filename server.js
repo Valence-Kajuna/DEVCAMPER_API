@@ -18,7 +18,7 @@ app.get('/api/v1/bootcamps', (req, res)=>{
 })
 
 // Get a single bootcamp
-app.get('api/v1/bootcamps/:id', (req,res)=>{
+app.get('/api/v1/bootcamps/:id', (req,res)=>{
     res.status(200).json(
         {
             "success": true,
@@ -28,7 +28,7 @@ app.get('api/v1/bootcamps/:id', (req,res)=>{
 })
 
 // Create a bootcamp
-app.post('api/v1/bootcamps', (req,res)=>{
+app.post('/api/v1/bootcamps', (req,res)=>{
     res.status(200).json(
         {
             "success": true,
@@ -38,7 +38,7 @@ app.post('api/v1/bootcamps', (req,res)=>{
 })
 
 // Edit a bootcamp
-app.put('api/v1/bootcamps/:id', (req,res)=>{
+app.put('/api/v1/bootcamps/:id', (req,res)=>{
     res.status(200).json(
         {
             "success": true,
@@ -49,7 +49,7 @@ app.put('api/v1/bootcamps/:id', (req,res)=>{
 
 
 // Delete a bootcamp
-app.delete('api/v1/bootcamps/:id', (req,res)=>{
+app.delete('/api/v1/bootcamps/:id', (req,res)=>{
     res.status(200).json(
         {
             "success": true,
