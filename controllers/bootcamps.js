@@ -71,13 +71,27 @@ exports.createBootcamp = async (req,res,next) =>{
 //@Method   Put
 //@route    /api/v1/bootcamps:/id
 //@access   Public
-exports.editBootcamp = (req,res,next) =>{
-    res.status(200).json(
-        {
-            "success": true,
-            "msg": `Edited bootcamp with id ${req.params.id}`
+exports.editBootcamp = async (req,res,next) =>{
+    try {
+        const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        });
+
+        if(!bootcamp){
+            throw "No bootcamp"
         }
-    )
+
+        res.status(200).json({
+            success: true,
+            body: bootcamp
+        });
+        
+    } catch (error) {
+        res.status(400).json({
+            success: false
+        });
+    }
 }
 
 //@desc     Get all bootcamps
