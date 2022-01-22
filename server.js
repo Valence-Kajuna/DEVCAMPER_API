@@ -18,6 +18,7 @@ const bootcamp = require('./routes/bootcamps')
 const app = express();
 
 // Configuring some middleware
+app.use(express.json()); // This is the middleware for the body parser.
 
 //Dev logging middleware
 if(process.env.NODE_ENV === 'development'){
