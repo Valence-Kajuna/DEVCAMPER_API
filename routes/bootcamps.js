@@ -1,3 +1,5 @@
+const express = require('express');
+const router = express.Router();
 
 //Get all bootcamps
 app.get('/api/v1/bootcamps', (req, res)=>{
