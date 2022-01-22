@@ -8,8 +8,13 @@ dotenv.config({ path: './config/config.env' });
 const app = express();
 
 // Creating sample route
-app.get('/', (req, res)=>{
-    res.send("Hello from express!")
+app.get('/api/v1/bootcamps', (req, res)=>{
+    res.sendStatus(200).json(
+        {
+            "success":true,
+            "msg": "Show all bootcamps"
+        }
+    )
 })
 
 // Make an app listen to port
