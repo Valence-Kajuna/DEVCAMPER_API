@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //Get all bootcamps
-router.get('/api/v1/bootcamps', (req, res)=>{
+router.get('/', (req, res)=>{
     res.status(200).json(
         {
             "success":true,
@@ -12,7 +12,7 @@ router.get('/api/v1/bootcamps', (req, res)=>{
 })
 
 // Get a single bootcamp
-router.get('/api/v1/bootcamps/:id', (req,res)=>{
+router.get('/:id', (req,res)=>{
     res.status(200).json(
         {
             "success": true,
@@ -22,7 +22,7 @@ router.get('/api/v1/bootcamps/:id', (req,res)=>{
 })
 
 // Create a bootcamp
-router.post('/api/v1/bootcamps', (req,res)=>{
+router.post('/', (req,res)=>{
     res.status(200).json(
         {
             "success": true,
@@ -32,7 +32,7 @@ router.post('/api/v1/bootcamps', (req,res)=>{
 })
 
 // Edit a bootcamp
-router.put('/api/v1/bootcamps/:id', (req,res)=>{
+router.put('/:id', (req,res)=>{
     res.status(200).json(
         {
             "success": true,
@@ -43,7 +43,7 @@ router.put('/api/v1/bootcamps/:id', (req,res)=>{
 
 
 // Delete a bootcamp
-router.delete('/api/v1/bootcamps/:id', (req,res)=>{
+router.delete('/:id', (req,res)=>{
     res.status(200).json(
         {
             "success": true,
@@ -51,3 +51,5 @@ router.delete('/api/v1/bootcamps/:id', (req,res)=>{
         }
     )
 })
+
+module.exports = router
