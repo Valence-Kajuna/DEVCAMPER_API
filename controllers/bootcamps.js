@@ -8,7 +8,7 @@ const geocoder = require('../utils/geocoder');
 //@access   Public
 exports.getBootcamps = async (req,res,next) =>{
     let queryStr = JSON.stringify(req.query)
-    queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`)
+    queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`)
     let query = JSON.parse(queryStr)
     console.log(query)
     try {
