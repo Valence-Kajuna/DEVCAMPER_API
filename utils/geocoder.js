@@ -7,6 +7,6 @@ const options = {
     apiKey: process.env.GEOCODER_API_KEY
 }
 
-const geocoder = NodeGeocode(options);
+const geocoder = NodeGeocoder(options);
 
 module.exports = geocoder;
