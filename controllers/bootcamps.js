@@ -52,11 +52,11 @@ exports.getBootcamps = async (req,res,next) =>{
         pagination = {};
 
         if(startIndex>0){
-            pagination.next = {next : page+1, limit: limit}
+            pagination.previous = {previous : page-1, limit: limit}
         }
 
         if(endIndex < total){
-            pagination.previous = {previous: page -1, limit: limit}
+            pagination.next = {next: page +1, limit: limit}
         }
 
 
