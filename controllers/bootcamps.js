@@ -14,7 +14,7 @@ exports.getBootcamps = async (req,res,next) =>{
         reqQuery = {...req.query}
 
         //Create a remove fields array
-        const removeFields = ['select', 'sort']
+        const removeFields = ['select', 'sort', 'page', 'limit']
         
         // Remove the fields from the copy
         removeFields.forEach(field => delete reqQuery[field])
@@ -39,6 +39,9 @@ exports.getBootcamps = async (req,res,next) =>{
             var sortFields = req.query.sort.split(',').join(' ');
             query.sort(sortFields);
         }
+
+        // Implementing pagination
+        const 
 
 
         const bootcamps = await query;
