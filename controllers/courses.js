@@ -55,7 +55,28 @@ exports.getSingleCourse =  async (req,res, next)=>{
 exports.createNewCourse =  async (req,res, next) =>{
     try {
         req.body.bootcamp  = req.params.bootcampId;
-        const course = await Course.create();
+        const course = await Course.create(req.body);
+
+        res.status(201).json({
+            success: true,
+            data: course
+        })
+    } catch (error) {
+        next(error)
+    }
+ 
+}
+
+//@desc     Update a course
+//@Method   Put
+//@route    /api/v1/courses/:id
+//@access   Private
+exports.updateCourse =  async (req,res, next) =>{
+    try {
+        const course = await Course.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        });
 
         res.status(201).json({
             success: true,
