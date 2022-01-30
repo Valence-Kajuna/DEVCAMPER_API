@@ -100,6 +100,16 @@ const BootcampSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
       },
+},{toJSON: {virtuals: true},
+  toObject: {virtuals: true}});
+
+
+// Reverse populate with virtuals
+BootcampSchema.virtual('courses', {
+  ref: 'Course',
+  localField: '_id',
+  foreignField: 'bootcamp',
+  justOne: false
 });
 
 // Creating a slug from the bootcamp name
