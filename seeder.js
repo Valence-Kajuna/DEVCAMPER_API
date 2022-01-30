@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Import the bootcamp models
 const Bootcamp = require('./models/Bootcamp');
-const Course = require('/models/Course');
+const Course = require('./models/Course');
 
 // Read a json file for bootcamps
 const bootcamps = JSON.parse(fs.readFileSync(`${__dirname}/_data/bootcamps.json`));
