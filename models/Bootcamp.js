@@ -137,4 +137,11 @@ BootcampSchema.pre('save', async function(next){
   next();
 })
 
+// Implementing cascade delete
+BootcampSchema.pre('remove', async function(next){
+  this.model('Course').deleteMany(
+    {bootcamp: this._id}
+  );
+})
+
 module.exports =  mongoose.model('Bootcamp', BootcampSchema);

@@ -143,12 +143,15 @@ exports.editBootcamp = async (req,res,next) =>{
 //@access   Public
 exports.deleteBootcamp = async (req,res,next) =>{
     try {
-        const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id);
-        res.status(200).json({
-            success : true,
-            data: {}
-        })
-    } catch (error) {
+        const bootcamp = await Bootcamp.findById(req.params.id);
+        if(bootcamp){
+            bootcamp.remove();
+            res.status(200).json({
+                success : true,
+                data: {}
+            })
+        }
+        }catch (error) {
         next(error);
     }
 }
