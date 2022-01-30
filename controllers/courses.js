@@ -47,3 +47,22 @@ exports.getSingleCourse =  async (req,res, next)=>{
         
     }
 }
+
+//@desc     Create a new course
+//@Method   Post
+//@route    /api/v1/bootcamps/:bootcampId/courses
+//@access   Private
+exports.createNewCourse =  async (req,res, next) =>{
+    try {
+        req.body.bootcamp  = req.params.bootcampId;
+        const course = await Course.create();
+
+        res.status(201).json({
+            success: true,
+            data: course
+        })
+    } catch (error) {
+        next(error)
+    }
+ 
+}
