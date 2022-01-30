@@ -92,7 +92,7 @@ exports.updateCourse =  async (req,res, next) =>{
 //@Method   Delete
 //@route    /api/v1/courses/:id
 //@access   Private
-exports.updateCourse =  async (req,res, next) =>{
+exports.deleteCourse =  async (req,res, next) =>{
     try {
         const course = await Course.findById(req.params.id);
         await course.remove();
