@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const connectDB = require('./config/db')
 const colors = require('colors')
 const errorHandler =  require('./middleware/error')
+const fileUpload = require('express-fileupload');
 
 //Load env variables
 dotenv.config({ path: './config/config.env' });
@@ -26,6 +27,9 @@ app.use(express.json()); // This is the middleware for the body parser.
 if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'))
 }
+
+// File upload middleware
+app.use(fileUpload());
 
 // Mount routes
 app.use('/api/v1/bootcamps', bootcamp);
