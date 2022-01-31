@@ -99,7 +99,7 @@ exports.deleteCourse =  async (req,res, next) =>{
 
         res.status(200).json({
             success: true,
-            data: course
+            data: {}
         })
     } catch (error) {
         next(error)
