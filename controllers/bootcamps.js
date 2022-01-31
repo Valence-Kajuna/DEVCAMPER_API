@@ -214,4 +214,3 @@ exports.uploadBootcampPhoto = async (req,res,next) =>{
     }
         
     }
-}
