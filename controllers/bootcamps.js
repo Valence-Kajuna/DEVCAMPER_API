@@ -209,6 +209,13 @@ exports.uploadBootcampPhoto = async (req,res,next) =>{
                 throw new ErrorResponse(`Problem with file upload`, 500);
             }
         });
+
+        bootcamp.photo = file.name;
+        bootcamp.save();
+        res.status(200).json({
+            success: true,
+            data: bootcamp.photo
+        });
     } catch (error) {
         next(error);
     }
