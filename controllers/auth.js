@@ -162,7 +162,34 @@ exports.resetPassword = async (req, res, next) => {
         user.resetPasswordToken = undefined;
         user.resetPasswordExpire = undefined;
         await user.save();
-        
+
+        res.status(200).json({
+            success: true,
+            data: user
+        });
+
+    } catch (error) {
+        next(error);
+    }
+
+}
+
+
+
+//@desc     Update User Details
+//@Method   Put
+//@route    /api/v1/auth/updatedetails
+//@access   Private
+exports.updateDetails = async (req, res, next) => {
+    const fieldsToUpdate = {
+        name: req.body.name,
+        email: req.body.email
+    };
+    try {
+        const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
+            new: true,
+            runValidators: true });
+            
         res.status(200).json({
             success: true,
             data: user
