@@ -101,3 +101,26 @@ exports.getMe = async (req, res, next) => {
     }
 
 }
+
+//@desc     Forgot password
+//@Method   Post
+//@route    /api/v1/auth/forgotpassword
+//@access   Private
+exports.forgotPassword = async (req, res, next) => {
+    try {
+        const user = await User.findOne({email: req.body.email});
+        if(!user){
+            return next(new ErrorResponse(`No user with email ${req.body.email}`, 404));
+        }
+        const token = user.getResetPasswordToken();
+        console.log(token);
+        res.status(200).json({
+            success: true,
+            data: user
+        });
+
+    } catch (error) {
+        next(error);
+    }
+
+}
