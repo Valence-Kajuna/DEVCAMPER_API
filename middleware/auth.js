@@ -10,14 +10,13 @@ exports.protect = async (req, res, next) => {
     // Get token from header
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
         token = req.headers.authorization.split(' ')[1];
-
     }
     // else if(req.cookies.token){
     //     token = req.cookies.token;
     // }
 
     if(!token){
-        return new ErrorResponse('Not authorized to acccess this route', 401);
+        return next(new  ErrorResponse('Not authorized to acccess this route', 401));
     }
 
     try {
@@ -26,8 +25,8 @@ exports.protect = async (req, res, next) => {
         console.log(decoded);
         req.user = await User.findById(decoded.id);
         next();
-    }catch(error){
-        return new ErrorResponse('Not authorized to acccess this route', 401);
+    } catch(error){
+        next(error)
     }
 
 }
