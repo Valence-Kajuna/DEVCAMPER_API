@@ -20,6 +20,7 @@
     "mongoose": "^6.1.7",
     "morgan": "^1.10.0",
     "node-geocoder": "^3.28.0",
+    "node-mailer": "^0.1.1",
     "slugify": "^1.6.5"
   },
   "devDependencies": {
