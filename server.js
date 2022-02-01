@@ -16,6 +16,7 @@ connectDB();
 // Import routes
 const bootcamp = require('./routes/bootcamps');
 const course = require('./routes/courses');
+const auth = require('./routes/auth');
 
 // Create and express app
 const app = express();
@@ -34,6 +35,7 @@ app.use(fileUpload());
 // Mount routes
 app.use('/api/v1/bootcamps', bootcamp);
 app.use('/api/v1/courses', course);
+app.use('/api/v1/auth', auth);
 app.use(errorHandler)
 
 // Make an app listen to port
