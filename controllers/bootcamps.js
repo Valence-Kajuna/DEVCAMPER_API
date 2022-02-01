@@ -45,8 +45,8 @@ exports.createBootcamp = async (req,res,next) =>{
         req.body.user = req.user.id;
         
         // Making sure user can add bootcamp once except for admin
-        const bootcamp = await Bootcamp.findOne({user: req.user.id});
-        if(bootcamp && req.user.role !== 'admin'){
+        const bootcampFound = await Bootcamp.findOne({user: req.user.id});
+        if(bootcampFound && req.user.role !== 'admin'){
             return next(new ErrorResponse(`The user with ID ${req.user.id} has already added a bootcamp`, 400));
         }
         const bootcamp = await Bootcamp.create(req.body);
