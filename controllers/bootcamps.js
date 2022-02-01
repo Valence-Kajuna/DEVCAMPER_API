@@ -69,10 +69,18 @@ exports.createBootcamp = async (req,res,next) =>{
 //@access   Private
 exports.editBootcamp = async (req,res,next) =>{
     try {
-        const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
+        let bootcamp = await Bootcamp.findById(req.params.id);
+
+        // Only admin and owner can edit
+        if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin'){
+            return next(new ErrorResponse(`The user with ID ${req.user.id} is not authorized to edit this bootcamp`, 401));
+        }
+
+        bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true
         });
+
 
         res.status(200).json({
             success: true,
@@ -91,6 +99,15 @@ exports.editBootcamp = async (req,res,next) =>{
 exports.deleteBootcamp = async (req,res,next) =>{
     try {
         const bootcamp = await Bootcamp.findById(req.params.id);
+        if(!bootcamp){
+            return next(new ErrorResponse(`Bootcamp with ID ${req.params.id} not found`, 404));
+        }
+    
+        // Only admin and owner can edit
+        if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin'){
+            return next(new ErrorResponse(`The user with ID ${req.user.id} is not authorized to edit this bootcamp`, 401));
+        }
+
         bootcamp.remove();
         res.status(200).json({
             success : true,
@@ -135,6 +152,12 @@ exports.getBootcampsInRadius = async (req,res,next) =>{
 exports.uploadBootcampPhoto = async (req,res,next) =>{
     try {
         const bootcamp = await Bootcamp.findById(req.params.id);
+        
+        // Only admin and owner can edit
+        if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin'){
+            return next(new ErrorResponse(`The user with ID ${req.user.id} is not authorized to edit this bootcamp`, 401));
+        }
+
         if(!bootcamp){
             throw new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404);
         }
