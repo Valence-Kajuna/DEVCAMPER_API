@@ -1,9 +1,9 @@
 const express = require('express');
 const {getCourses, getSingleCourse, createNewCourse,updateCourse, deleteCourse} = require('../controllers/courses');
-const {protect} = require('../middleware/auth');
+const {protect, authorize} = require('../middleware/auth');
 const router = express.Router({mergeParams: true});
 
-router.route('/').get(getCourses).post(protect,createNewCourse);
-router.route('/:id').get(getSingleCourse).put(protect,updateCourse).delete(protect,deleteCourse);
+router.route('/').get(getCourses).post(protect,authorize('publisher', 'admin'),createNewCourse);
+router.route('/:id').get(getSingleCourse).put(protect,authorize('publisher', 'admin'),updateCourse).delete(protect,authorize('publisher', 'admin'),deleteCourse);
 
 module.exports =  router

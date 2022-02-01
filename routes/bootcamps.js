@@ -4,7 +4,7 @@ const {getBootcamps, getBootcamp, createBootcamp, editBootcamp, deleteBootcamp, 
 
 // Import advanced results middleware
 const advancedResults = require('../middleware/advancedResults');
-const {protect} = require('../middleware/auth');
+const {protect, authorize} = require('../middleware/auth');
 // Impoer the bootcamp model
 const Bootcamp = require('../models/Bootcamp');
 
@@ -15,9 +15,9 @@ const courseRouter = require('./courses');
 router.use('/:bootcampId/courses',courseRouter);
 
 // Creating routes
-router.route('/:id/photo').put(protect,uploadBootcampPhoto);
+router.route('/:id/photo').put(protect,authorize('publisher','admin'),uploadBootcampPhoto);
 router.route('/radius/:zipcode/:distance').get(getBootcampsInRadius);
-router.route('/').get(advancedResults(Bootcamp),getBootcamps).post(protect,createBootcamp);
-router.route('/:id').get(getBootcamp).put(protect,editBootcamp).delete(protect,deleteBootcamp);
+router.route('/').get(advancedResults(Bootcamp),getBootcamps).post(protect, authorize('publisher', 'admin'),createBootcamp);
+router.route('/:id').get(getBootcamp).put(protect,authorize('publisher', 'admin'),editBootcamp).delete(protect,authorize('publisher', 'admin'),deleteBootcamp);
 
 module.exports = router
