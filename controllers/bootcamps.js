@@ -66,7 +66,7 @@ exports.createBootcamp = async (req,res,next) =>{
 //@desc     Edit a bootcamp
 //@Method   Put
 //@route    /api/v1/bootcamps:/id
-//@access   Public
+//@access   Private
 exports.editBootcamp = async (req,res,next) =>{
     try {
         const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
