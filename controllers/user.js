@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require('../models/User');
 
 //@desc     Get all users
 //@Method   Get
