@@ -79,5 +79,26 @@ const sendTokenResponse = (user, statusCode, res) => {
             success: true,
             token
         });
-        
+
+}
+
+
+
+//@desc     Get current Logged in User
+//@Method   Get
+//@route    /api/v1/auth/me
+//@access   Privare
+
+exports.register = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user.id);
+        res.status(200).json({
+            success: true,
+            data: user
+        });
+            
+    } catch (error) {
+        next(error);
+    }
+
 }
