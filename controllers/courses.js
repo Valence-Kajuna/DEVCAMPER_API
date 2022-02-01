@@ -1,5 +1,6 @@
 const ErrorResponse = require('../utils/errorResponse');
 const Course = require('../models/Course');
+const Bootcamp = require('../models/Bootcamp');
 
 //@desc     Get courses
 //@Method   Get
@@ -133,7 +134,7 @@ exports.deleteCourse =  async (req,res, next) =>{
         if(req.user.role !== 'admin' && req.user.id !== bootcamp.user.toString()){
             return next(new ErrorResponse(`The user with ID ${req.user.id} is not authorized to delete this course`, 401));
         }
-        
+
         await course.remove();
 
         res.status(200).json({
