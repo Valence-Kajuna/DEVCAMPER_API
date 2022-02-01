@@ -113,6 +113,7 @@ exports.forgotPassword = async (req, res, next) => {
             return next(new ErrorResponse(`No user with email ${req.body.email}`, 404));
         }
         const token = user.getResetPasswordToken();
+        await user.save({validateBeforeSave: false});
         console.log(token);
         res.status(200).json({
             success: true,
