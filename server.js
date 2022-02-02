@@ -8,6 +8,7 @@ const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require("helmet");
+const xss = require('xss-clean')
 
 //Load env variables
 dotenv.config({ path: './config/config.env' });
@@ -44,6 +45,9 @@ app.use(mongoSanitize());
 
 // Set security headers using helmet
 app.use(helmet());
+
+// Prevent XSS- Attack
+app.use(xss());
 
 // Mount routes
 app.use('/api/v1/bootcamps', bootcamp);
