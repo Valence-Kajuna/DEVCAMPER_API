@@ -19,6 +19,7 @@ const bootcamp = require('./routes/bootcamps');
 const course = require('./routes/courses');
 const user = require('./routes/user');
 const auth = require('./routes/auth');
+const review = require('./routes/reviews');
 
 // Create and express app
 const app = express();
@@ -41,6 +42,7 @@ app.use('/api/v1/bootcamps', bootcamp);
 app.use('/api/v1/courses', course);
 app.use('/api/v1/users', user)
 app.use('/api/v1/auth', auth);
+app.use('/api/v1/reviews', review);
 app.use(errorHandler)
 
 // Make an app listen to port

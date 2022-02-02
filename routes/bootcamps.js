@@ -10,9 +10,11 @@ const Bootcamp = require('../models/Bootcamp');
 
 // Include other resourse routers
 const courseRouter = require('./courses');
+const reviewRouter = require('./reviews');
 
 // Reroute into other resourses router
 router.use('/:bootcampId/courses',courseRouter);
+router.use('/:bootcampId/reviews',reviewRouter);
 
 // Creating routes
 router.route('/:id/photo').put(protect,authorize('publisher','admin'),uploadBootcampPhoto);
