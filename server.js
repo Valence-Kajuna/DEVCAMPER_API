@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const dotenv = require('dotenv');
 const morgan = require('morgan')
 const connectDB = require('./config/db')
@@ -42,6 +43,9 @@ if(process.env.NODE_ENV === 'development'){
 
 // File upload middleware
 app.use(fileUpload());
+
+// Set a static folder
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Sanitize inpute
 app.use(mongoSanitize());
