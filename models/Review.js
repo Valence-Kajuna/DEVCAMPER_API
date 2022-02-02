@@ -1,5 +1,6 @@
 // Importing mongoose module
 const mongoose = require('mongoose');
+const Bootcamp = require('../models/Bootcamp');
 
 // Creating a mongoose schema
 
@@ -57,9 +58,10 @@ ReviewSchema.statics.getAverageRating = async function(bootcampId){
 
     // Put average rating to database
     try {
-        const bootcamp = await Bootcamp.findById(bootcampId);
-        bootcamp.averageRating = obj[0].averageRating;
-        await bootcamp.save();
+        await this.model('Bootcamp').findByIdAndUpdate(bootcampId, {
+            averageRating: obj[0].averageRating
+        });
+        
     } catch (err) {
         console.error(err);
     }
@@ -67,6 +69,7 @@ ReviewSchema.statics.getAverageRating = async function(bootcampId){
 
 // Create a mongoose middleware to run after review is saved
 ReviewSchema.post('save', function(next){
+    console.log("bootcamp id: " + this.bootcamp+ "has been saved");
     this.constructor.getAverageRating(this.bootcamp);
 });
 
