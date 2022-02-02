@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router({mergeParams: true});
 const Review = require('../models/Review');
 const Bootcamp = require('../models/Bootcamp');
-const {getReviews, getReview, createReview} = require('../controllers/reviews');
+const {getReviews, getReview, createReview, updateReview, deleteReview} = require('../controllers/reviews');
 const advancedResults = require('../middleware/advancedResults');
 const {protect, authorize} = require('../middleware/auth');
 
@@ -13,6 +13,7 @@ router.route('/')
     .post(protect,authorize('user', 'admin'), createReview);
 
 router.route('/:id')
-    .get(getReview);
+    .get(getReview)
+    .put(protect,authorize('user', 'admin'),updateReview).delete(protect,authorize('user', 'admin'),deleteReview);
 
 module.exports = router;
