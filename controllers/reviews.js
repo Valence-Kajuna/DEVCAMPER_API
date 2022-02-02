@@ -55,3 +55,28 @@ exports.getReview = async (req,res,next) =>{
         next(error)
     }
 }
+
+//@desc     Create a New Review
+//@Method   Post
+//@route    /api/v1/bootcamps/:bootcampId/reviews
+//@access   Private
+exports.createReview = async (req,res,next) =>{
+    try {
+       req.body.bootcamp = req.params.bootcampId;
+       req.body.user = req.user.id;
+       const bootcamp = await Bootcamp.findById(req.params.bootcampId);
+         if(!bootcamp){
+             return next(new ErrorResponse('Bootcamp not found'), 404);
+            }
+        
+        const review = await Review.create(req.body);
+        res.status(201).json({
+            success: true,
+            data: review
+        }); 
+        
+
+    } catch (error) {
+        next(error)
+    }
+}
