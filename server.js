@@ -11,6 +11,7 @@ const helmet = require("helmet");
 const xss = require('xss-clean')
 const rateLimit = require('express-rate-limit');
 const hpp =  require('hpp');
+var cors = require('cors')
 
 //Load env variables
 dotenv.config({ path: './config/config.env' });
@@ -50,6 +51,9 @@ app.use(helmet());
 
 // Prevent XSS- Attack
 app.use(xss());
+
+// CORS Middleware
+app.use(cors());
 
 // Set up rate limit
 app.use(rateLimit({
