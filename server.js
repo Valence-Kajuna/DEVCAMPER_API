@@ -6,6 +6,7 @@ const colors = require('colors')
 const errorHandler =  require('./middleware/error')
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
+const mongoSanitize = require('express-mongo-sanitize');
 
 //Load env variables
 dotenv.config({ path: './config/config.env' });
@@ -36,6 +37,9 @@ if(process.env.NODE_ENV === 'development'){
 
 // File upload middleware
 app.use(fileUpload());
+
+// Sanitize inpute
+app.use(mongoSanitize());
 
 // Mount routes
 app.use('/api/v1/bootcamps', bootcamp);
